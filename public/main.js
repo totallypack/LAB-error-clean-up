@@ -1,35 +1,9 @@
+import { v4 as uuidv4 } from 'uuid';
 import '../styles/main.scss';
-
-const houses = [
-  {
-    house: 'gryffindor',
-    crest:
-      'https://static.wikia.nocookie.net/pottermore/images/1/16/Gryffindor_crest.png'
-  },
-  {
-    house: 'slytherin',
-    crest:
-      'https://static.wikia.nocookie.net/pottermore/images/4/45/Slytherin_Crest.png'
-  },
-  {
-    house: 'hufflepuff',
-    crest:
-      'https://static.wikia.nocookie.net/pottermore/images/5/5e/Hufflepuff_crest.png'
-  },
-  {
-    house: 'ravenclaw',
-    crest:
-      'https://static.wikia.nocookie.net/pottermore/images/4/4f/Ravenclaw_crest.png'
-  }
-];
-
-const renderToDOM = (divId, content) => {
-  const selectedDiv = document.querySelector(divId);
-  selectedDiv.innerHTML = content;
-};
-
-const students = [];
-const voldysArmy = []; // starts as an empty array
+import houses from '../utils/sample_data/houses';
+import students from '../utils/sample_data/students';
+import voldysArmy from '../utils/sample_data/voldy';
+import renderToDOM from '../components/renderToDom';
 
 const studentsOnDom = (divId, array, house = 'Hogwarts') => {
   let domString = '';
@@ -91,14 +65,14 @@ const startSortingBtn = () => {
   renderToDOM('#form-container', domString);
 };
 
-// Create a new ID for the students
-const createId = (array) => {
-  if (array.length) {
-    const idArray = array.map((el) => el.id);
-    return Math.max(...idArray) + 1;
-  }
-  return 0;
-};
+// // Create a new ID for the students
+// const createId = (array) => {
+//   if (array.length) {
+//     const idArray = array.map((el) => el.id);
+//     return Math.max(...idArray) + 1;
+//   }
+//   return 0;
+// };
 
 // ********** LOGIC  ********** //
 // sorts student to a house and then place them in the students array
@@ -111,8 +85,8 @@ const sortStudent = (e) => {
 
     // create the new student object
     students.push({
-      id: createId(students),
-      name: student.value,
+      id: uuidv4(),
+      name: sortingHat.name,
       house: sortingHat.house,
       crest: sortingHat.crest
     });
